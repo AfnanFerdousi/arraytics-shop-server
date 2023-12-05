@@ -19,3 +19,9 @@ export type UserModel = {
         savedPassword: string
     ): Promise<boolean>;
 } & mongoose.Model<IUser>;
+
+export type IUserFilters = {
+    name?: string;
+    email?: string;
+    searchText ?: string;
+};
