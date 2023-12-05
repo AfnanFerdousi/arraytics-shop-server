@@ -16,10 +16,6 @@ const userSchema = new mongoose.Schema<IUser, UserModel>({
         type: String,
         required: true
     },
-    created_at: {
-        type: Date,
-        default: Date.now
-    },
     created_by: {
         type: String,
         required: true
@@ -33,11 +29,11 @@ const userSchema = new mongoose.Schema<IUser, UserModel>({
 )
 
 userSchema.statics.isUserExist = async function (
-    id: string
+    email: string
 ): Promise<Pick<IUser, "name" | "password" | "email" | "id"> | null> {
     return await User.findOne(
-        { phoneNumber: id },
-        { _id: 1, password: 1, role: 1, phoneNumber: 1 }
+        { email: email },
+        { id: 1, password: 1 }
     );
 };
 

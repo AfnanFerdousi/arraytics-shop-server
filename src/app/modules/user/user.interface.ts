@@ -6,7 +6,6 @@ export type IUser = {
     name: string;
     email: string;
     password: string;
-    created_at: Date;
     created_by: string;
 };
 
