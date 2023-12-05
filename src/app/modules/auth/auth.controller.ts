@@ -40,7 +40,28 @@ const loginUser = catchAsync(async (req: Request, res: Response) => {
     })
 })
 
+
+const refreshToken = catchAsync(async (req: Request, res: Response) => {
+    const { refreshToken } = req.cookies;
+    const result = await authService.refreshTokenService(refreshToken);
+
+    const cookieOptions = {
+        secure: config.env === "production" ? true : false,
+        httpOnly: true,
+    };
+
+    res.cookie("refreshToken", refreshToken, cookieOptions);
+
+    sendResponse(res, {
+        statusCode: httpStatus.OK,
+        success: true,
+        message: "Refreshed token",
+        data: result,
+    });
+});
+
 export default {
     createUser,
-    loginUser
+    loginUser,
+    refreshToken,
 }

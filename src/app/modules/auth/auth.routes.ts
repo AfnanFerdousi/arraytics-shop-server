@@ -12,6 +12,7 @@ router.post(
     validateRequest(createUserZodSchema),
     authController.createUser
 );
-router.post("/login",validateRequest(loginUserZodSchema) ,authController.loginUser);
+router.post("/login", validateRequest(loginUserZodSchema), authController.loginUser);
+router.get("/refresh", authController.refreshToken);
 
 export default router;
