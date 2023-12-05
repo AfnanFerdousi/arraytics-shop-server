@@ -1,7 +1,7 @@
 import express from "express";
 import validateRequest from "../../middleware/validateRequest";
 import {
-    createUserZodSchema,
+    createUserZodSchema, loginUserZodSchema,
 } from "./auth.validation";
 import authController from "./auth.controller";
 
@@ -12,5 +12,6 @@ router.post(
     validateRequest(createUserZodSchema),
     authController.createUser
 );
+router.post("/login",validateRequest(loginUserZodSchema) ,authController.loginUser);
 
 export default router;
