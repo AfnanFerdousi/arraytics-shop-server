@@ -20,10 +20,10 @@ const itemSchema = new mongoose.Schema<IItem, ItemModel>({
 
 itemSchema.statics.isItemExist = async function (
     name: string
-) : Promise<Pick<IItem, "name" | "id" | "created_by"> | null> {
+) : Promise<Pick<IItem, "name" | "_id" | "created_by"> | null> {
     return await Item.findOne(
         { name: name },
-        { id: 1, name: 1, created_by: 1 }
+        { _id: 1, name: 1, created_by: 1 }
     );
 };
 

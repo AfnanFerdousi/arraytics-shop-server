@@ -71,7 +71,18 @@ const getAllItemService = async (
 
 };
 
+const updateItemService = async (
+    id: string,
+    body: Partial<IItem>
+) => {
+    const item = await Item.findOneAndUpdate({ _id: id }, body, {
+        new: true,
+    });
+    return item;
+}
+
 export default {
     createItemService,
     getAllItemService,
+    updateItemService
 };

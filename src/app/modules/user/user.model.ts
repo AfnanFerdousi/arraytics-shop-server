@@ -30,10 +30,10 @@ const userSchema = new mongoose.Schema<IUser, UserModel>({
 
 userSchema.statics.isUserExist = async function (
     email: string
-): Promise<Pick<IUser, "name" | "password" | "email" | "id" | "created_by"> | null> {
+): Promise<Pick<IUser, "name" | "password" | "email" | "_id" | "created_by"> | null> {
     return await User.findOne(
         { email: email },
-        { id: 1, password: 1 }
+        { _id: 1, password: 1 }
     );
 };
 

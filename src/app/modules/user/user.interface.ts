@@ -2,7 +2,7 @@
 import mongoose from "mongoose";
 
 export type IUser = {
-    id: mongoose.Schema.Types.ObjectId;
+    _id: mongoose.Schema.Types.ObjectId;
     name: string;
     email: string;
     password: string;
@@ -11,8 +11,8 @@ export type IUser = {
 
 export type UserModel = {
     isUserExist(
-        id: string
-    ): Promise<Pick<IUser, "name" | "password" | "email" | "id" | "created_by"> | null>;
+        _id: string
+    ): Promise<Pick<IUser, "name" | "password" | "email" | "_id" | "created_by"> | null>;
     isPasswordMatched(
         givenPassword: string,
         savedPassword: string

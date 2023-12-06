@@ -39,7 +39,21 @@ const getItems = catchAsync(async (req: Request, res: Response) => {
     });
 })
 
+const updateItem = catchAsync(async (req: Request, res: Response) => {
+    const id = req.params.id;
+    const data = req.body;
+    const result = await itemService.updateItemService(id, data);
+
+    sendResponse<IItem>(res, {
+        success: true,
+        statusCode: httpStatus.OK,
+        message: 'Successfully updated item',
+        data: result
+    })
+})
+
 export default {
     createItem,
-    getItems
+    getItems,
+    updateItem
 }
