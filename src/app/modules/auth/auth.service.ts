@@ -32,15 +32,15 @@ const loginUserService = async (
         throw new ApiError(httpStatus.UNAUTHORIZED, "Password is incorrect");
     }
 
-    const { email, name, id } = user;
+    const { email, name, _id } = user;
     const accessToken = createToken(
-        { email, name, id },
+        { email, name, _id },
         config.jwt.jwt_secret as Secret,
         config.jwt.expires_in as string
     );
 
     const refreshToken = createToken(
-        { email, name, id },
+        { email, name, _id },
         config.jwt.jwt_refresh_secret as Secret,
         config.jwt.refresh_expires_in as string
     );
@@ -72,7 +72,7 @@ const refreshTokenService = async (
     }
 
     const newAccessToken = createToken(
-        { id: user?.id, email },
+        { _id: user?._id, email },
         config.jwt.jwt_secret as Secret,
         config.jwt.expires_in as string
     );
