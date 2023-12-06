@@ -81,8 +81,20 @@ const updateItemService = async (
     return item;
 }
 
+const deleteItemService = async(
+    id: string    
+) => {
+    const item = await Item.isItemExist(id);
+    if (!item) {
+        throw new Error("Item not found");
+    } else {
+        return await Item.deleteOne({ _id: id });
+    }
+}
+
 export default {
     createItemService,
     getAllItemService,
-    updateItemService
+    updateItemService, 
+    deleteItemService
 };

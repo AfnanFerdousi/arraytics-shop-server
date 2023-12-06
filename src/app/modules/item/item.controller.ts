@@ -52,8 +52,22 @@ const updateItem = catchAsync(async (req: Request, res: Response) => {
     })
 })
 
+
+const deleteItem = catchAsync(async (req: Request, res: Response): Promise<void> => {
+    const id = req.params.id;
+    const result = await itemService.deleteItemService(id);
+
+    sendResponse<any>(res, {
+        success: true,
+        statusCode: httpStatus.OK,
+        message: 'Successfully deleted item',
+        data: result
+    })
+})
+
 export default {
     createItem,
     getItems,
-    updateItem
+    updateItem,
+    deleteItem
 }

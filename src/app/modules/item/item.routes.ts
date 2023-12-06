@@ -8,5 +8,6 @@ const router = express.Router();
 router.post("/create-item", validateRequest(createItemZodSchema), itemController.createItem);
 router.get("/", itemController.getItems);
 router.patch("/:id", itemController.updateItem);
+router.delete("/:id", itemController.deleteItem);
 
 export default router;
