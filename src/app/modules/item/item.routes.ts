@@ -6,5 +6,6 @@ import { createItemZodSchema } from "./item.validation";
 const router = express.Router();
 
 router.post("/create-item", validateRequest(createItemZodSchema), itemController.createItem);
+router.get("/", itemController.getItems);
 
 export default router;

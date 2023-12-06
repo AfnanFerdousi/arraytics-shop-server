@@ -12,3 +12,8 @@ export type ItemModel = {
         id: string
     ): Promise<Pick<IItem, "name" | "id" | "created_by"> | null>;
 } & mongoose.Model<IItem>;
+
+export type IItemFilters = {
+    name?: string;
+    searchText?: string;
+};
