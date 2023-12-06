@@ -2,7 +2,6 @@
 import mongoose from "mongoose";
 
 export type IUser = {
-    refreshToken: string;
     id: mongoose.Schema.Types.ObjectId;
     name: string;
     email: string;
