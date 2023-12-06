@@ -25,6 +25,19 @@ const getAllUsers = catchAsync(async (req: Request, res: Response) => {
     });
 });
 
+
+const updateUser = catchAsync(async (req: Request, res: Response) => {
+    const { email } = req.params;
+    const updatedUser = await userService.updateUserService(email, req.body);
+    sendResponse<IUser>(res, {
+        success: true,
+        statusCode: httpStatus.OK,
+        message: "Successfully updated user",
+        data: updatedUser,
+    });
+})
+
 export default {
     getAllUsers,
+    updateUser
 }

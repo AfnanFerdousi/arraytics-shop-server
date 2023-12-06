@@ -59,7 +59,18 @@ const getAllUserService = async (
     };
 };
 
+const updateUserService = async (
+    email: string,
+    body: Partial<IUser>
+): Promise<IUser | null> => {
+    const result = await User.findOneAndUpdate({ email: email }, body, {
+        new: true,
+    });
+    return result;
+};
+
 
 export default {
     getAllUserService,
+    updateUserService
 }
