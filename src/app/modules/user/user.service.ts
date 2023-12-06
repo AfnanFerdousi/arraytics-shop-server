@@ -15,7 +15,6 @@ const getAllUserService = async (
         paginationHelpers(paginationOptions);
 
     const andConditions = [];
-    console.log(searchText, filtersData);
     if (searchText) {
         andConditions.push({
             $or: userSearchableFields.map((field: any) => ({
