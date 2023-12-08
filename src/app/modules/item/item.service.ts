@@ -84,7 +84,7 @@ const updateItemService = async (
 const deleteItemService = async(
     id: string    
 ) => {
-    const item = await Item.isItemExist(id);
+    const item = await Item.findOne({ _id: id });
     if (!item) {
         throw new Error("Item not found");
     } else {

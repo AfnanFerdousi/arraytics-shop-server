@@ -3,7 +3,7 @@ import ApiError from "../../../errors/ApiError";
 import { IUser } from "../user/user.interface";
 import User from "../user/user.model";
 import { ILoginUser, ILoginUserResponse, IRefreshTokenResponse } from "./auth.interface";
-import { createToken, verifyToken } from "../../../helpers/jwtHelpers";
+import { createToken, decodeToken, verifyToken } from "../../../helpers/jwtHelpers";
 import config from "../../../config";
 import { Secret } from "jsonwebtoken";
 
@@ -21,6 +21,8 @@ const loginUserService = async (
     payload: ILoginUser
 ): Promise<ILoginUserResponse> => {
     const user = await User.isUserExist(payload.email);
+
+    console.log(user)
     if (!user) {
         throw new ApiError(httpStatus.NOT_FOUND, "User does not exist");
     }
@@ -48,6 +50,7 @@ const loginUserService = async (
     return {
         accessToken,
         refreshToken,
+        email,
     };
 };
 
@@ -77,7 +80,10 @@ const refreshTokenService = async (
         config.jwt.expires_in as string
     );
 
-    return { accessToken: newAccessToken };
+    return {
+        accessToken: newAccessToken,
+        email: user?.email,
+    };
 };
 
 export default {
