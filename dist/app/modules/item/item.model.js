@@ -27,9 +27,9 @@ const itemSchema = new mongoose_1.default.Schema({
     versionKey: false,
     virtuals: true
 });
-itemSchema.statics.isItemExist = function (id) {
+itemSchema.statics.isItemExist = function (name) {
     return __awaiter(this, void 0, void 0, function* () {
-        return yield Item.findOne({ _id: id }, { _id: 1, name: 1, created_by: 1 });
+        return yield Item.findOne({ name: name }, { _id: 1, name: 1, created_by: 1 });
     });
 };
 const Item = mongoose_1.default.model("Item", itemSchema);

@@ -83,7 +83,7 @@ const updateItemService = (id, body) => __awaiter(void 0, void 0, void 0, functi
     return item;
 });
 const deleteItemService = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const item = yield item_model_1.default.isItemExist(id);
+    const item = yield item_model_1.default.findOne({ _id: id });
     if (!item) {
         throw new Error("Item not found");
     }

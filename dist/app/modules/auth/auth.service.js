@@ -29,6 +29,7 @@ const createUserService = (body) => __awaiter(void 0, void 0, void 0, function* 
 });
 const loginUserService = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const user = yield user_model_1.default.isUserExist(payload.email);
+    console.log(user);
     if (!user) {
         throw new ApiError_1.default(http_status_1.default.NOT_FOUND, "User does not exist");
     }
@@ -42,6 +43,7 @@ const loginUserService = (payload) => __awaiter(void 0, void 0, void 0, function
     return {
         accessToken,
         refreshToken,
+        email,
     };
 });
 const refreshTokenService = (token) => __awaiter(void 0, void 0, void 0, function* () {
@@ -58,7 +60,10 @@ const refreshTokenService = (token) => __awaiter(void 0, void 0, void 0, functio
         throw new ApiError_1.default(http_status_1.default.NOT_FOUND, "User does not exist!");
     }
     const newAccessToken = (0, jwtHelpers_1.createToken)({ _id: user === null || user === void 0 ? void 0 : user._id, email }, config_1.default.jwt.jwt_secret, config_1.default.jwt.expires_in);
-    return { accessToken: newAccessToken };
+    return {
+        accessToken: newAccessToken,
+        email: user === null || user === void 0 ? void 0 : user.email,
+    };
 });
 exports.default = {
     createUserService,
