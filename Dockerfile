@@ -1,14 +1,12 @@
 FROM node:18
 
 WORKDIR /app
-
+COPY . .
 COPY package*.json ./
-
-ENV NODE_ENV=production
 
 RUN npm install
 
-COPY . .
+RUN npm run build
 
 EXPOSE 5000
 
